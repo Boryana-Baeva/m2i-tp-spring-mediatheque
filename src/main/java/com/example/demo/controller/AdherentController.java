@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Adherent;
-import com.example.demo.repository.AdherentRepository;
 import com.example.demo.service.MediathequeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -19,8 +19,8 @@ public class RepositoryTests {
 
     @Test
     void testSaveAdherent() {
-//        Adherent a1 = new Adherent("Tom", "Grey");
-//        adherentRepository.save(a1);
+        Adherent a1 = new Adherent("Tom", "Grey");
+        adherentRepository.save(a1);
 
         Adherent a2 = new Adherent();
         a2.setPrenom("Jim");

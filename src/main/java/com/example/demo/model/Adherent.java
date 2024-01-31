@@ -3,6 +3,7 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,18 +23,33 @@ public class Adherent {
     @Column(name = "numero_adherant", unique = true)
     private String numeroAdherant;
 
+    @Column(name = "date_expiration_abonnement")
+    private LocalDate dateExpirationAbonnement;
+
     @OneToMany(mappedBy = "adherent", orphanRemoval = true)
     private List<Emprunt> emprunts = new ArrayList<>();
 
+    @Column(name = "date_start_abonnement")
+    private LocalDate dateStartAbonnement;
+
+    public LocalDate getDateStartAbonnement() {
+        return dateStartAbonnement;
+    }
+
+    public void setDateStartAbonnement(LocalDate dateStartAbonnement) {
+        this.dateStartAbonnement = dateStartAbonnement;
+    }
 
     public Adherent() {
         this.numeroAdherant = generateNewNumeroAdherent();
+        this.dateStartAbonnement = LocalDate.now();
+        this.dateExpirationAbonnement = this.dateStartAbonnement.plusYears(1);
     }
 
     public Adherent(String prenom, String nom) {
+        super();
         this.prenom = prenom;
         this.nom = nom;
-        this.numeroAdherant = generateNewNumeroAdherent();
     }
 
     public Integer getId() {
@@ -64,6 +80,14 @@ public class Adherent {
 
     public void setNumeroAdherant(String numeroAdherant) {
         this.numeroAdherant = numeroAdherant;
+    }
+
+    public LocalDate getDateExpirationAbonnement() {
+        return dateExpirationAbonnement;
+    }
+
+    public void setDateExpirationAbonnement(LocalDate dateExpirationAbonnement) {
+        this.dateExpirationAbonnement = dateExpirationAbonnement;
     }
 
     public List<Emprunt> getEmprunts() {
