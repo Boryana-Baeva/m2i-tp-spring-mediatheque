@@ -6,7 +6,7 @@ On a besoin d’une classe qui va contenir les règles métier liées au fonctio
 
 #### Créer une API :
 - GET /adherents 
-- OST /adherents 
+- POST /adherents 
 - GET /documents 
 - POST /documents 
 - GET /emprunts 
@@ -19,6 +19,10 @@ On a besoin d’une classe qui va contenir les règles métier liées au fonctio
 
 Aide pour les associations JPA:
 1 Emprunt doit contenir 1 Adherent et 1 Document (ManyToOne)
+
+#### Bonus 
+- Pouvoir rendre un Document 
+- Lister les documents en retards et les emails des adherents concernés 
 
 ### Solution :
 #### GET ALL Adherent
