@@ -61,19 +61,9 @@ public class MediathequeService {
         return empruntRepository.findById(id);
     }
 
-    public void emprunter(Adherent adherent, Document document) {
-        if(checkAdherentAbonnementActive(adherent)
-            && checkWithinAdherentEmpruntLimit(adherent)
-            && checkDocumentAvailable(document)) {
-                Emprunt emprunt = new Emprunt(document, adherent);
-                empruntRepository.save(emprunt);
-
-                document.setIsAvailable(false);
-                documentRepository.save(document);
-        }
-    }
-
-    public void emprunter(Adherent adherent, Document document, LocalDate dateEmprunt) {
+    public boolean emprunter(Adherent adherent, Document document, LocalDate dateEmprunt) {
+        boolean success = false;
+        System.out.println(document);
         if(checkAdherentAbonnementActive(adherent)
                 && checkWithinAdherentEmpruntLimit(adherent)
                 && checkDocumentAvailable(document)) {
@@ -82,7 +72,10 @@ public class MediathequeService {
 
             document.setIsAvailable(false);
             documentRepository.save(document);
+
+            success = true;
         }
+            return success;
     }
 
     private boolean checkDocumentAvailable(Document document) {

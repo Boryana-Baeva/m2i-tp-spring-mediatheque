@@ -38,11 +38,15 @@ public class EmpruntController {
             mediathequeService.getDocumentById(emprunt.getDocument().getId())
                                 .ifPresent(emprunt::setDocument);
 
-            mediathequeService.emprunter(emprunt.getAdherent(),
-                                emprunt.getDocument(), emprunt.getDateStart());
+            if(!mediathequeService.emprunter(emprunt.getAdherent(),
+                                emprunt.getDocument(), emprunt.getDateStart())) {
+                return ResponseEntity.badRequest().body("L'emprunt a echoué !");
+            }
+            else {
+                EmpruntDTO empruntDTO = DTOMapper.convertEmpruntToDTO(emprunt);
 
-            EmpruntDTO empruntDTO = DTOMapper.convertEmpruntToDTO(emprunt);
-            return ResponseEntity.ok(empruntDTO);
+                return ResponseEntity.ok(empruntDTO);
+            }
         }
     }
 
