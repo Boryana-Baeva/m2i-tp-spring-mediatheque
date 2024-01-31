@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +27,13 @@ public class Adherent {
 
 
     public Adherent() {
+        this.numeroAdherant = generateNewNumeroAdherent();
     }
 
-    public Adherent(String prenom, String nom, String numeroAdherant) {
+    public Adherent(String prenom, String nom) {
         this.prenom = prenom;
         this.nom = nom;
-        this.numeroAdherant = numeroAdherant;
+        this.numeroAdherant = generateNewNumeroAdherent();
     }
 
     public Integer getId() {
@@ -76,15 +78,13 @@ public class Adherent {
         this.emprunts.add(emprunt);
     }
 
-//    private String generateNewNumeroAdherent() {
-//        int length = 10;
-//        boolean useLetters = true;
-//        boolean useNumbers = false;
-//        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
-//
-//        System.out.println(generatedString);
-//        return "";
-//    }
+    private String generateNewNumeroAdherent() {
+        int length = 10;
+        boolean useLetters = true;
+        boolean useNumbers = true;
+
+        return RandomStringUtils.random(length, useLetters, useNumbers);
+    }
 
     @Override
     public String toString() {
