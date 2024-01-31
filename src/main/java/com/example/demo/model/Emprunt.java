@@ -33,6 +33,12 @@ public class Emprunt {
         this.adherent = adherent;
     }
 
+    public Emprunt(Document document, Adherent adherent, LocalDate dateStart) {
+        this.document = document;
+        this.adherent = adherent;
+        this.dateStart = dateStart;
+    }
+
     public Integer getId() {
         return id;
     }

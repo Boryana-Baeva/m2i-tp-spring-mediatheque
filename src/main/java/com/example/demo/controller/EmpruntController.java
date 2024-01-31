@@ -33,13 +33,13 @@ public class EmpruntController {
         }
         else {
             mediathequeService.getAdherentById(emprunt.getAdherent().getId())
-                    .ifPresent(emprunt::setAdherent);
+                                .ifPresent(emprunt::setAdherent);
 
             mediathequeService.getDocumentById(emprunt.getDocument().getId())
-                    .ifPresent(emprunt::setDocument);
+                                .ifPresent(emprunt::setDocument);
 
-            //mediathequeService.saveEmprunt(emprunt);
-            mediathequeService.emprunter(emprunt.getAdherent(), emprunt.getDocument());
+            mediathequeService.emprunter(emprunt.getAdherent(),
+                                emprunt.getDocument(), emprunt.getDateStart());
 
             EmpruntDTO empruntDTO = DTOMapper.convertEmpruntToDTO(emprunt);
             return ResponseEntity.ok(empruntDTO);

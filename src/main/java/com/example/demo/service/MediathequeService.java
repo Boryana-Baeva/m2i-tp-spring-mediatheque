@@ -73,6 +73,18 @@ public class MediathequeService {
         }
     }
 
+    public void emprunter(Adherent adherent, Document document, LocalDate dateEmprunt) {
+        if(checkAdherentAbonnementActive(adherent)
+                && checkWithinAdherentEmpruntLimit(adherent)
+                && checkDocumentAvailable(document)) {
+            Emprunt emprunt = new Emprunt(document, adherent, dateEmprunt);
+            empruntRepository.save(emprunt);
+
+            document.setIsAvailable(false);
+            documentRepository.save(document);
+        }
+    }
+
     private boolean checkDocumentAvailable(Document document) {
         return document.getIsAvailable();
     }
