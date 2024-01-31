@@ -30,8 +30,8 @@ public class DTOMapper {
     public static DocumentDTO convertDocumentToDTO(Document entity) {
         DocumentDTO dto = new DocumentDTO();
         dto.setTitre(entity.getTitre());
-        dto.setType(entity.getType().name());
-        dto.setAvailable(entity.getIsAvailable());
+        dto.setType(entity.getType().typeName);
+        dto.setDisponible(entity.getIsAvailable() ? "OUI" : "NON");
         return dto;
     }
 }

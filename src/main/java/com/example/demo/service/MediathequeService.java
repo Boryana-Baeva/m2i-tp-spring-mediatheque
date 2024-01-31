@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MediathequeService {
@@ -30,6 +31,10 @@ public class MediathequeService {
         return adherentRepository.findAll();
     }
 
+    public Optional<Adherent> getAdherentById(Integer id) {
+        return adherentRepository.findById(id);
+    }
+
     /** DOCUMENT */
     public void saveDocument(Document document) {
         documentRepository.save(document);
@@ -39,6 +44,10 @@ public class MediathequeService {
         return documentRepository.findAll();
     }
 
+    public Optional<Document> getDocumentById(Integer id) {
+        return documentRepository.findById(id);
+    }
+
     /** EMPRUNT */
     public void saveEmprunt(Emprunt emprunt) {
         empruntRepository.save(emprunt);
@@ -46,6 +55,10 @@ public class MediathequeService {
 
     public List<Emprunt> getAllEmprunts() {
         return empruntRepository.findAll();
+    }
+
+    public Optional<Emprunt> getEmpruntById(Integer id) {
+        return empruntRepository.findById(id);
     }
 
     public void emprunter(Adherent adherent, Document document) {

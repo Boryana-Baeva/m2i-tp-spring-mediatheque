@@ -1,22 +1,18 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.DocumentType;
-
 import java.io.Serializable;
-import java.util.Objects;
 
 public class DocumentDTO implements Serializable {
     private String titre;
     private String type;
-    private Boolean isAvailable;
-
+    private String disponible;
     public DocumentDTO() {
     }
 
-    public DocumentDTO(String titre, String type, Boolean isAvailable) {
+    public DocumentDTO(String titre, String type, String disponible) {
         this.titre = titre;
         this.type = type;
-        this.isAvailable = isAvailable;
+        this.disponible = disponible;
     }
 
     public String getTitre() {
@@ -27,8 +23,8 @@ public class DocumentDTO implements Serializable {
         return type;
     }
 
-    public Boolean getIsAvailable() {
-        return isAvailable;
+    public String getDisponible() {
+        return disponible;
     }
 
     public void setTitre(String titre) {
@@ -39,8 +35,8 @@ public class DocumentDTO implements Serializable {
         this.type = type;
     }
 
-    public void setAvailable(Boolean available) {
-        isAvailable = available;
+    public void setDisponible(String disponible) {
+        this.disponible = disponible;
     }
 
     @Override
@@ -48,6 +44,6 @@ public class DocumentDTO implements Serializable {
         return getClass().getSimpleName() + "(" +
                 "titre = " + titre + ", " +
                 "type = " + type + ", " +
-                "isAvailable = " + isAvailable + ")";
+                "isAvailable = " + disponible + ")";
     }
 }

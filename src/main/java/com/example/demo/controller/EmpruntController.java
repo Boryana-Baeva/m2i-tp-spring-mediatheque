@@ -32,8 +32,17 @@ public class EmpruntController {
             return ResponseEntity.badRequest().body(errors.toString());
         }
         else {
-            mediathequeService.saveEmprunt(emprunt);
-            return ResponseEntity.ok(emprunt);
+            mediathequeService.getAdherentById(emprunt.getAdherent().getId())
+                    .ifPresent(emprunt::setAdherent);
+
+            mediathequeService.getDocumentById(emprunt.getDocument().getId())
+                    .ifPresent(emprunt::setDocument);
+
+            //mediathequeService.saveEmprunt(emprunt);
+            mediathequeService.emprunter(emprunt.getAdherent(), emprunt.getDocument());
+
+            EmpruntDTO empruntDTO = DTOMapper.convertEmpruntToDTO(emprunt);
+            return ResponseEntity.ok(empruntDTO);
         }
     }
 

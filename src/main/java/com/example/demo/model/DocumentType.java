@@ -6,6 +6,8 @@ public enum DocumentType {
     FILM("Film / Documentaire"),
     IMAGE("Image / Photo");
 
+    public final String typeName;
     DocumentType(String typeName) {
+        this.typeName = typeName;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AdherentDTO;
+import com.example.demo.dto.DTOMapper;
 import com.example.demo.model.Adherent;
 import com.example.demo.service.MediathequeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,10 @@ public class AdherentController {
     private MediathequeService mediathequeService;
 
     @GetMapping("adherents")
-    public List<Adherent> getAll() {
-        return mediathequeService.getAllAdherents();
+    public List<AdherentDTO> getAll() {
+        return mediathequeService.getAllAdherents()
+                .stream().map(DTOMapper::convertAdherentToDTO)
+                .toList();
     }
 
     @PostMapping("adherents")
