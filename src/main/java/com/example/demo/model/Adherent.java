@@ -80,7 +80,7 @@ public class Adherent {
 
     private String generateNewNumeroAdherent() {
         int length = 10;
-        boolean useLetters = true;
+        boolean useLetters = false;
         boolean useNumbers = true;
 
         return RandomStringUtils.random(length, useLetters, useNumbers);
