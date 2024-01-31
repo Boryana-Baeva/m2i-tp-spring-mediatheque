@@ -33,7 +33,8 @@ public class DocumentController {
         }
         else {
             mediathequeService.saveDocument(document);
-            return ResponseEntity.ok(document);
+            DocumentDTO dto = DTOMapper.convertDocumentToDTO(document);
+            return ResponseEntity.ok(dto);
         }
     }
 

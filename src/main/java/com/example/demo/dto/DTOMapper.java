@@ -5,6 +5,7 @@ import com.example.demo.model.Document;
 import com.example.demo.model.Emprunt;
 
 public class DTOMapper {
+    /** Convertions Entity to DTO **/
     public static EmpruntDTO convertEmpruntToDTO(Emprunt entity) {
         EmpruntDTO dto = new EmpruntDTO();
         dto.setDate(entity.getDateStart());
@@ -33,5 +34,16 @@ public class DTOMapper {
         dto.setType(entity.getType().typeName);
         dto.setDisponible(entity.getIsAvailable() ? "OUI" : "NON");
         return dto;
+    }
+
+    /** Convertions DTO to Entity **/
+    public static Adherent convertDTOToAdherent(AdherentDTO dto) {
+        Adherent entity = new Adherent();
+        entity.setPrenom(dto.getPrenom());
+        entity.setNom(dto.getNom());
+        entity.setNumeroAdherant(dto.getNumeroAdherant());
+        entity.setDateExpirationAbonnement(dto.getDateExpirationAbonnement());
+        entity.setDateStartAbonnement(dto.getDateExpirationAbonnement().minusYears(1));
+        return entity;
     }
 }

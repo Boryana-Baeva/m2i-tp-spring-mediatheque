@@ -32,7 +32,8 @@ public class AdherentController {
         }
         else {
             mediathequeService.saveAdherent(adherent);
-            return ResponseEntity.ok(adherent);
+            AdherentDTO dto = DTOMapper.convertAdherentToDTO(adherent);
+            return ResponseEntity.ok(dto);
         }
     }
 
