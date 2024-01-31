@@ -47,9 +47,11 @@ public class Adherent {
     }
 
     public Adherent(String prenom, String nom) {
-        super();
         this.prenom = prenom;
         this.nom = nom;
+        this.numeroAdherant = generateNewNumeroAdherent();
+        this.dateStartAbonnement = LocalDate.now();
+        this.dateExpirationAbonnement = this.dateStartAbonnement.plusYears(1);
     }
 
     public Integer getId() {

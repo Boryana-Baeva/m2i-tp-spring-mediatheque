@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "emprunts")
 public class Emprunt {
@@ -17,10 +19,16 @@ public class Emprunt {
     @JoinColumn(name = "adherent_id")
     private Adherent adherent;
 
+    @Column(name = "date_start", nullable = false)
+    private LocalDate dateStart;
+
+
     public Emprunt() {
+        this.dateStart = LocalDate.now();
     }
 
     public Emprunt(Document document, Adherent adherent) {
+        this.dateStart = LocalDate.now();
         this.document = document;
         this.adherent = adherent;
     }
@@ -32,7 +40,6 @@ public class Emprunt {
     public void setId(Integer id) {
         this.id = id;
     }
-
 
     public Adherent getAdherent() {
         return adherent;
@@ -50,12 +57,21 @@ public class Emprunt {
         this.document = document;
     }
 
+    public LocalDate getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(LocalDate dateStart) {
+        this.dateStart = dateStart;
+    }
+
     @Override
     public String toString() {
         return "Emprunt{" +
                 "id=" + id +
                 ", document=" + document.getTitre() +
                 ", adherent=" + adherent.getNumeroAdherant() +
+                ", date start=" + dateStart +
                 '}';
     }
 }
