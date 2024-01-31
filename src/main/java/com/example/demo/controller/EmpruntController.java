@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.DTOMapper;
+import com.example.demo.dto.EmpruntDTO;
 import com.example.demo.model.Document;
 import com.example.demo.model.Emprunt;
 import com.example.demo.service.MediathequeService;
@@ -17,8 +19,10 @@ public class EmpruntController {
     private MediathequeService mediathequeService;
 
     @GetMapping("emprunts")
-    public List<Emprunt> getAll() {
-        return mediathequeService.getAllEmprunts();
+    public List<EmpruntDTO> getAll() {
+        return mediathequeService.getAllEmprunts()
+                .stream().map(DTOMapper::convertEmpruntToDTO)
+                .toList();
     }
 
     @PostMapping("emprunts")

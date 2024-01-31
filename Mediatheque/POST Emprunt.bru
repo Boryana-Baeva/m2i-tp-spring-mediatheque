@@ -1,0 +1,19 @@
+meta {
+  name: POST Emprunt
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:8080/api/emprunts
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "adherent": 1,
+      "document": 1,
+      "date" : "2024-01-25"
+  }
+}
