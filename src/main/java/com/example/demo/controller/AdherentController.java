@@ -15,8 +15,6 @@ import java.util.List;
 public class AdherentController {
     @Autowired
     private MediathequeService mediathequeService;
-    @Autowired
-    private AdherentRepository adherentRepository;
 
     @GetMapping("adherents")
     public List<Adherent> getAll() {
@@ -25,11 +23,12 @@ public class AdherentController {
 
     @PostMapping("adherents")
     public ResponseEntity<?> save(@RequestBody Adherent adherent) {
-        if(!getAdherentPostErrors(adherent).isEmpty()) {
-            return ResponseEntity.badRequest().build();
+        List<String> errors = getAdherentPostErrors(adherent);
+        if(!errors.isEmpty()) {
+            return ResponseEntity.badRequest().body(errors.toString());
         }
         else {
-            adherentRepository.save(adherent);
+            mediathequeService.saveAdherent(adherent);
             return ResponseEntity.ok(adherent);
         }
     }
@@ -49,7 +48,7 @@ public class AdherentController {
             errors.add("Numéro d'adhérent obligatoire !");
         }
 
-        if(adherentRepository.findAll().stream()
+        if(mediathequeService.getAllAdherents().stream()
                 .anyMatch(a -> adherent.getNumeroAdherant().equals(a.getNumeroAdherant()))) {
             errors.add("Numéro d'adhérent déjà existant !");
         }
