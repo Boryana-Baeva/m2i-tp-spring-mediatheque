@@ -16,6 +16,9 @@ public class Document {
     @Column(name = "type")
     private DocumentType type;
 
+    @Column(name = "is_available", nullable = false)
+    private Boolean isAvailable = true;
+
     public Document() {
     }
 
@@ -48,12 +51,21 @@ public class Document {
         this.type = type;
     }
 
+    public Boolean getIsAvailable() {
+        return isAvailable;
+    }
+
+    public void setIsAvailable(Boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
+
     @Override
     public String toString() {
         return "Document{" +
                 "id=" + id +
                 ", titre='" + titre + '\'' +
                 ", type=" + DocumentType.valueOf(type.name()) +
+                ", isAvailable=" + isAvailable  +
                 '}';
     }
 }
