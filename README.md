@@ -38,7 +38,14 @@ Aide pour les associations JPA:
 ![postD.PNG](screenshots/postD.PNG)
 
 #### GET ALL Emprunt
-![getE.PNG](screenshots/getE.PNG)
+![getAllEmprunts.PNG](screenshots/getAllEmprunts.PNG)
 
 #### POST Emprunt
 ![postE.PNG](screenshots/postE.PNG)
+
+#### Bonus:
+#### RENDRE DOCUMENT
+![rendreDocument.PNG](screenshots/rendreDocument.PNG)
+
+#### DISPLAY LATE DOCUMENTS
+![getLateDocuments.PNG](screenshots/getLateDocuments.PNG)
