@@ -22,6 +22,9 @@ public class Emprunt {
     @Column(name = "date_start", nullable = false)
     private LocalDate dateStart;
 
+    @Column(name = "is_ongoing")
+    private Boolean isOngoing = true;
+
 
     public Emprunt() {
         this.dateStart = LocalDate.now();
@@ -71,6 +74,13 @@ public class Emprunt {
         this.dateStart = dateStart;
     }
 
+    public Boolean getIsOngoing() {
+        return isOngoing;
+    }
+
+    public void setIsOngoing(Boolean isOngoing) {
+        this.isOngoing = isOngoing;
+    }
     @Override
     public String toString() {
         return "Emprunt{" +

@@ -63,7 +63,7 @@ public class MediathequeService {
 
     public boolean emprunter(Adherent adherent, Document document, LocalDate dateEmprunt) {
         boolean success = false;
-        System.out.println(document);
+
         if(checkAdherentAbonnementActive(adherent)
                 && checkWithinAdherentEmpruntLimit(adherent)
                 && checkDocumentAvailable(document)) {
@@ -78,12 +78,21 @@ public class MediathequeService {
             return success;
     }
 
+    public void rendre(Emprunt emprunt) {
+        emprunt.setIsOngoing(false);
+        emprunt.getDocument().setIsAvailable(true);
+        documentRepository.save(emprunt.getDocument());
+        empruntRepository.save(emprunt);
+    }
+
     private boolean checkDocumentAvailable(Document document) {
         return document.getIsAvailable();
     }
 
     private boolean checkWithinAdherentEmpruntLimit(Adherent adherent) {
-        return adherent.getEmprunts().size() < 3;
+        return adherent.getEmprunts()
+                .stream().filter(e -> e.getIsOngoing().equals(true)).toList()
+                .size() < 3;
     }
 
     private boolean checkAdherentAbonnementActive(Adherent adherent) {

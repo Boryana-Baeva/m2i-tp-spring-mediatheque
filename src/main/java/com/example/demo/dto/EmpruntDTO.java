@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class EmpruntDTO implements Serializable {
     private LocalDate date;
+    private boolean ongoing = true;
     private DocumentDTO document;
     private AdherentDTO adherent;
 
@@ -42,11 +43,21 @@ public class EmpruntDTO implements Serializable {
         this.date = date;
     }
 
+    public boolean isOngoing() {
+        return ongoing;
+    }
+
+    public void setOngoing(boolean ongoing) {
+        this.ongoing = ongoing;
+    }
+
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "document = " + document + ", " +
-                "adherent = " + adherent + ", " +
-                "date = " + date + ")";
+        return "EmpruntDTO{" +
+                "date=" + date +
+                ", ongoing=" + ongoing +
+                ", document=" + document +
+                ", adherent=" + adherent +
+                '}';
     }
 }

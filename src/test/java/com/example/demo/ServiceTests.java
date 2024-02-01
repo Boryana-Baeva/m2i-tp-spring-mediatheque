@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
+
 @SpringBootTest
 public class ServiceTests {
     @Autowired
@@ -21,6 +23,18 @@ public class ServiceTests {
         Document d1 = new Document("Casablanca", DocumentType.FILM);
         mediathequeService.saveDocument(d1);
 
-        mediathequeService.emprunter(a1, d1);
+        mediathequeService.emprunter(a1, d1, LocalDate.now());
+    }
+
+    @Test
+    void testRendre() {
+        if(mediathequeService.getEmpruntById(1).isPresent()) {
+            Emprunt e = mediathequeService.getEmpruntById(1).get();
+
+            mediathequeService.rendre(e);
+        }
+        else {
+            System.out.println("Error in method Rendre !");
+        }
     }
 }

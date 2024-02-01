@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api")
@@ -48,6 +49,27 @@ public class EmpruntController {
                 return ResponseEntity.ok(empruntDTO);
             }
         }
+    }
+
+    @PutMapping("emprunts/{id}/rendre")
+    public ResponseEntity<?> rendreDocument(@PathVariable("id") Integer id) {
+        Optional<Emprunt> op = mediathequeService.getEmpruntById(id);
+
+        if(op.isPresent()) {
+            Emprunt emprunt = op.get();
+
+            if(emprunt.getIsOngoing().equals(false)) {
+                return ResponseEntity.ok("Le document a dèjà été rendu !");
+            }
+            else {
+                mediathequeService.rendre(emprunt);
+                return ResponseEntity.ok("Le document a été rendu avec succès !");
+            }
+        }
+        else {
+            return ResponseEntity.badRequest().body("Emprunt avec id " + id + " inexistant !");
+        }
+
     }
 
     private List<String> getEmpruntPostErrors(Emprunt emprunt) {

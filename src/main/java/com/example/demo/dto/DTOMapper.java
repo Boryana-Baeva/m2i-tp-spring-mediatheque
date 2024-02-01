@@ -9,6 +9,7 @@ public class DTOMapper {
     public static EmpruntDTO convertEmpruntToDTO(Emprunt entity) {
         EmpruntDTO dto = new EmpruntDTO();
         dto.setDate(entity.getDateStart());
+        dto.setOngoing(entity.getIsOngoing());
 
         AdherentDTO adherentDTO = convertAdherentToDTO(entity.getAdherent());
         dto.setAdherent(adherentDTO);
