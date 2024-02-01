@@ -10,6 +10,7 @@ public class DTOMapper {
         EmpruntDTO dto = new EmpruntDTO();
         dto.setDate(entity.getDateStart());
         dto.setOngoing(entity.getIsOngoing());
+        dto.setLate(entity.isLate());
 
         AdherentDTO adherentDTO = convertAdherentToDTO(entity.getAdherent());
         dto.setAdherent(adherentDTO);
@@ -34,6 +35,13 @@ public class DTOMapper {
         dto.setTitre(entity.getTitre());
         dto.setType(entity.getType().typeName);
         dto.setDisponible(entity.getIsAvailable() ? "OUI" : "NON");
+        return dto;
+    }
+
+    public static LateDocumentDTO buildLateDocumentDTOFromEmprunt(Emprunt entity) {
+        LateDocumentDTO dto = new LateDocumentDTO();
+        dto.setTitre(entity.getDocument().getTitre());
+        dto.setEmprunteur(entity.getAdherent().getNumeroAdherant());
         return dto;
     }
 

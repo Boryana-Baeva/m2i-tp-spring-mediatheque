@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.DTOMapper;
+import com.example.demo.dto.DocumentDTO;
 import com.example.demo.dto.EmpruntDTO;
+import com.example.demo.dto.LateDocumentDTO;
 import com.example.demo.model.Document;
 import com.example.demo.model.Emprunt;
 import com.example.demo.service.MediathequeService;
@@ -70,6 +72,17 @@ public class EmpruntController {
             return ResponseEntity.badRequest().body("Emprunt avec id " + id + " inexistant !");
         }
 
+    }
+
+    @GetMapping("emprunts/retards")
+    public List<LateDocumentDTO> getAllLateEmprunts() {
+        List<Emprunt> lateEmprunts = mediathequeService.getAllEmprunts()
+                .stream().filter(e -> e.isLate() && e.getIsOngoing().equals(true))
+                .toList();
+
+        return lateEmprunts.stream()
+                .map(DTOMapper::buildLateDocumentDTOFromEmprunt)
+                .toList();
     }
 
     private List<String> getEmpruntPostErrors(Emprunt emprunt) {

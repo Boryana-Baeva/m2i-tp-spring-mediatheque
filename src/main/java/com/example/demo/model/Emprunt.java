@@ -25,6 +25,9 @@ public class Emprunt {
     @Column(name = "is_ongoing")
     private Boolean isOngoing = true;
 
+    @Column(name = "duree_jours")
+    private Integer dureeJours = 30;
+
 
     public Emprunt() {
         this.dateStart = LocalDate.now();
@@ -40,6 +43,13 @@ public class Emprunt {
         this.document = document;
         this.adherent = adherent;
         this.dateStart = dateStart;
+    }
+
+    public Emprunt(Document document, Adherent adherent, LocalDate dateStart, Integer dureeJours) {
+        this.document = document;
+        this.adherent = adherent;
+        this.dateStart = dateStart;
+        this.dureeJours = dureeJours;
     }
 
     public Integer getId() {
@@ -81,6 +91,19 @@ public class Emprunt {
     public void setIsOngoing(Boolean isOngoing) {
         this.isOngoing = isOngoing;
     }
+
+    public Integer getDureeJours() {
+        return dureeJours;
+    }
+
+    public void setDureeJours(Integer dureeJours) {
+        this.dureeJours = dureeJours;
+    }
+
+    public boolean isLate() {
+        return LocalDate.now().isAfter(dateStart.plusDays(dureeJours)) && isOngoing.equals(true);
+    }
+
     @Override
     public String toString() {
         return "Emprunt{" +

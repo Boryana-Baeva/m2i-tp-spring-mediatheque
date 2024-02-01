@@ -7,6 +7,7 @@ import java.util.Objects;
 public class EmpruntDTO implements Serializable {
     private LocalDate date;
     private boolean ongoing = true;
+    private boolean late = false;
     private DocumentDTO document;
     private AdherentDTO adherent;
 
@@ -51,11 +52,20 @@ public class EmpruntDTO implements Serializable {
         this.ongoing = ongoing;
     }
 
+    public boolean isLate() {
+        return late;
+    }
+
+    public void setLate(boolean late) {
+        this.late = late;
+    }
+
     @Override
     public String toString() {
         return "EmpruntDTO{" +
                 "date=" + date +
                 ", ongoing=" + ongoing +
+                ", late=" + late +
                 ", document=" + document +
                 ", adherent=" + adherent +
                 '}';
